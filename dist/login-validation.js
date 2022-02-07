@@ -27,6 +27,14 @@ $.validator.addMethod(
         (value.length == 8 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/))
       );
     }
+    // French Phone
+    else if ($('#country-code-login').val() == "33") {
+      return (
+        this.optional(element) ||
+        (value.length == 9 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/)) ||
+        (value.length == 10 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/) && value[0] == "0")
+      );
+    }
   },
   "Please enter a valid phone number"
 );
@@ -100,7 +108,7 @@ function sendOTP(callback) {
 
   $.ajax({
     //url:'https://www.promptpay.asia/pwa/send_sms.php?to=' + phoneNr
-    url: 'https://ewa-services.com/ewa/send_sms.php?to=' + phoneNr
+    url: 'https://root.ewa-services.com/ewa/send_sms.php?to=' + phoneNr
   }).done(function (response) {
     $("#kn-loading-spinner").hide();
 
@@ -121,7 +129,7 @@ function submitOTP() {
   $.ajax({
     //url:'https://www.promptpay.asia/pwa/validate_otp.php?to=' + phoneNr + '&otp=' +  OTPCode
     url:
-      "https://ewa-services.com/ewa/validate_otp.php?to=" +
+      "https://root.ewa-services.com/ewa/validate_otp.php?to=" +
       phoneNr +
       "&otp=" +
       OTPCode,
