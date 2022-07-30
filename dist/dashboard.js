@@ -53,6 +53,9 @@ var available_amount = balance - requested_amount;
 
 var check = requests_check(cutoff_day, requested_transactions, max_number_requests);
 
+var cutoff_day_tmp = cutoff_day == "" ? "-" : cutoff_day;
+var condition = (new Date() <= new Date(cutoff_day_tmp.split("/")[2], cutoff_day_tmp.split("/")[1] - 1, cutoff_day_tmp.split("/")[0]));
+
 var html = '<section id="custom-view-scene1">' +
   '<div class="payday-wrapper">' +
   '<div>' +
@@ -66,8 +69,9 @@ var html = '<section id="custom-view-scene1">' +
   '<div class="max-withdrawable-label">Maximum Withdrawable Amount</div>' +
   '<div class="max-amount-button">' +
   '<span>' + (Math.round((available_amount * withdrawable_threshold)*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span>' +
-//'<a' + (check === true ? ' href="' + window.location.pathname + '#request"' : ' style="pointer-events:none;" class="disabled"') + '>Withdraw</a>' +
-  '<a href="' + window.location.pathname + "#request\"" + '>Withdraw</a>' +
+  // '<a' + (check === true ? ' href="' + window.location.pathname + '#request"' : ' style="pointer-events:none;" class="disabled"') + '>Withdraw</a>' +
+  // '<a href="' + window.location.pathname + "#request\"" + '>Withdraw</a>' +
+  '<a' + (condition === true ? ' href="' + window.location.pathname + '#request"' : ' style="pointer-events:none;" class="disabled"') + '>Withdraw</a>' +
   '</div>' +
   '</div>' +
   '</section>';
