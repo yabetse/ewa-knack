@@ -54,7 +54,7 @@ var available_amount = balance - requested_amount;
 var check = requests_check(cutoff_day, requested_transactions, max_number_requests);
 
 var cutoff_day_tmp = cutoff_day == "" ? "-" : cutoff_day;
-var condition = (new Date() <= new Date(cutoff_day_tmp.split("/")[2], cutoff_day_tmp.split("/")[1] - 1, cutoff_day_tmp.split("/")[0]));
+var condition = ((new Date()).setHours(0,0,0,0) <= new Date(cutoff_day_tmp.split("/")[2], cutoff_day_tmp.split("/")[1] - 1, cutoff_day_tmp.split("/")[0]));
 
 var html = '<section id="custom-view-scene1">' +
   '<div class="payday-wrapper">' +
